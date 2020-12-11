@@ -3,10 +3,6 @@ import _ from "lodash";
 
 const disneyMoviesPath = "disneyMovies.json"
 
-const disneyMoviesJson = () => {
-  return JSON.parse(fs.readFileSync(disneyMoviesPath))
-}
-
 class Movie {
   constructor({ title, releaseYear, runtime }) {
     this.title = title;
@@ -15,15 +11,13 @@ class Movie {
   }
 
   static findAll() {
-    const moviesData = disneyMoviesJson().disneyMovies;
+    const moviesData = JSON.parse(fs.readFileSync(disneyMoviesPath))
+    
+    const movies = moviesData.disneyMovies.map(movie => {
+      return new Movie(movie);
+    })
 
-    let movies = [];
-    moviesData.forEach((movie) => {
-      const newMovie = new Movie(movie);
-      movies.push(newMovie);
-    });
-
-    return movies;
+    return movies
   }
 
   // static getNextMovieId() {

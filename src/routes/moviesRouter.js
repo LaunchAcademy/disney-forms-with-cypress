@@ -25,7 +25,7 @@ moviesRouter.post("/", (req, res) => {
     
     res.redirect("/movies");
   } else {
-    res.redirect("movies/new");
+    res.render("movies/new");
   }
 });
 
