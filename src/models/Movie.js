@@ -3,44 +3,62 @@ import _ from "lodash";
 
 const disneyMoviesPath = "disneyMovies.json"
 
-const disneyMoviesJson = () => {
-  return JSON.parse(fs.readFileSync(disneyMoviesPath))
-}
-
 class Movie {
-  constructor({ title, releaseYear, runtime }) {
+  constructor({ id, title, releaseYear, runtime }) {
+    this.id = id;
     this.title = title;
     this.releaseYear = releaseYear;
     this.runtime = runtime;
   }
 
   static findAll() {
-    const moviesData = disneyMoviesJson().disneyMovies;
+    const moviesData = JSON.parse(fs.readFileSync(disneyMoviesPath))
 
-    let movies = [];
-    moviesData.forEach((movie) => {
-      const newMovie = new Movie(movie);
-      movies.push(newMovie);
+    const movies = moviesData.disneyMovies.map((movie) => {
+      return new Movie(movie);
     });
 
-    return movies;
+    return movies
   }
 
-  // static getNextMovieId() {
-  //   const maxMovie = _.maxBy(
-  //     this.findAll(),
-  //     (movie) => movie.id
-  //   );
-  //   return maxMovie.id + 1;
-  // }
+  isValid() {
+    this.errors = {}
+    const requiredFields = ["title", "releaseYear", "runtime"]
+    let isValid = true
+
+    for (const requiredField of requiredFields) {
+      this.errors[requiredField] = []
+      if(!this[requiredField]) {
+        isValid = false
+        this.errors[requiredField].push("can't be blank")
+      }
+    }
+    
+    return isValid
+  }
+
+  static getNextMovieId() {
+    const maxMovie = _.maxBy(
+      this.findAll(),
+      (movie) => movie.id
+    );
+    return maxMovie.id + 1;
+  }
 
   save() {
-    // this.id = this.constructor.getNextMovieId();
-    const movies = this.constructor.findAll();
-    movies.push(this);
-    const data = { disneyMovies: movies };
-    fs.writeFileSync(disneyMoviesPath, JSON.stringify(data));
-    return true;
+    if (this.isValid()) {
+      delete this.errors
+      this.id = this.constructor.getNextMovieId();
+      
+      const movies = this.constructor.findAll();
+      movies.push(this);
+      
+      const data = { disneyMovies: movies };
+      fs.writeFileSync(disneyMoviesPath, JSON.stringify(data));
+      return true;
+    } else {
+      return false
+    }
   }
 }
 

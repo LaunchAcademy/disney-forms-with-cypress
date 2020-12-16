@@ -38,7 +38,7 @@ app.use(
 )
 app.use(flash())
 
-// flush session
+// flash session
 app.use((req, res, next) => {
   if (req.session && req.session.flash && req.session.flash.length > 0) {
     req.session.flash = []

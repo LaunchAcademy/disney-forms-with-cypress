@@ -17,15 +17,15 @@ moviesRouter.post("/", (req, res) => {
   const title = req.body.title
   const releaseYear = req.body.releaseYear
   const runtime = req.body.runtime
+
+  const newMovieObject = { title: title, releaseYear: releaseYear, runtime: runtime}
   
-  // debugger
-  if (title != "" && releaseYear != "" && runtime != "") {
-    const movie = new Movie(req.body);
-    movie.save();
-    
+  const movie = new Movie(newMovieObject);
+
+  if (movie.save()) {
     res.redirect("/movies");
   } else {
-    res.redirect("movies/new");
+    res.render("movies/new", { errors: movie.errors, movie: newMovieObject })
   }
 });
 

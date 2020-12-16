@@ -15,11 +15,12 @@ So that I can show my friends what I've seen
 
 Acceptance Criteria
 -------------------
-* I can visit this page by clinking on a link on the movies index page
+* I can visit this page by clicking on a link from the movies index page
 * I must enter a title
 * I must enter a release year
 * I must enter a runtime
 * If I forget a field, errors are displayed
+* An invalid submission should re-render the form with any previously submitted data
 ```
 
 - Use TDD to satisfy the tests
