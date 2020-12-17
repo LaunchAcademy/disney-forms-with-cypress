@@ -1,10 +1,8 @@
 ## Clinic for NodeJS Week 2: Express
 
-### TDD Posting Forms
+### TDD Posting Forms Goals
 
-### Goals
-
-- Write happy-path and sad-path cypress tests for the user story below:
+- Use TDD to satisfy the cypress tests for the happy-path and sad-path of the user story below:
 
 ```no-highlight
 User Story
@@ -19,8 +17,6 @@ Acceptance Criteria
 * I must enter a title
 * I must enter a release year
 * I must enter a runtime
-* If I forget a field, errors are displayed
 * An invalid submission should re-render the form with any previously submitted data
+* If I forget a field, errors are displayed
 ```
-
-- Use TDD to satisfy the tests
