@@ -1,0 +1,29 @@
+<h1>Add a New Movie</h1>
+
+{{#if errors }}
+  <ul class="errors">
+  {{#each errors as |errorObject errorKey|}}
+    {{#each errorObject}}
+      {{#if this }}
+        <li>{{errorKey}} {{this}}</li>
+      {{/if}}
+    {{/each}}
+  {{/each}}
+  </ul>
+{{/if}}
+
+<form class="new-movie-form" action="/movies" method="POST">
+  <label for="title">Title:
+    <input type="text" id="title" name="title" value="{{ movie.title }}">
+  </label>
+  <br />
+  <label for="releaseYear">Release Year:
+    <input type="text" id="releaseYear" name="releaseYear"  value="{{ movie.releaseYear }}">
+  </label>
+  <br />
+  <label for="runtime">Runtime:
+    <input type="text" id="runtime" name="runtime"  value="{{ movie.runtime }}">
+  </label>
+  <br />
+  <input class="button" type="submit" value="Save!">
+</form>
