@@ -10,21 +10,11 @@ describe("New Movie Form", () => {
     cy.visit("/movies/new")
   })
   
-  it("can navigate to the form through a link on the index page", () => {
-    cy.visit("/movies")
-
-    cy.get("a")
-      .should("have.text", "Add a Movie")
-      .and("have.attr", "href", "/movies/new")
-      .click()
-    
-      cy.url().should("eq", "http://localhost:3000/movies/new")
-  })
-
-  it("displays the text 'Add a New Movie", () => {
-    cy.get("h1")
-      .should("have.text", "Add a New Movie")
-  })
+  // unnecessary test example, though these may be present for assignments to guide you
+  // it("displays the text 'Add a New Movie", () => {
+  //   cy.get("h1")
+  //     .should("have.text", "Add a New Movie")
+  // })
 
   context("when the form is submitted correctly", () => {
     it("the user is redirected to the index page where they can see the new movie info", () => {
