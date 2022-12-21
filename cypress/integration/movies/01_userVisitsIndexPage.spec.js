@@ -10,7 +10,7 @@ describe("User Visits Index Page", () => {
   })
   
   context("when arriving at the movie index page", () => {
-    it("sees the first two movies on listed on the page", () => {
+    it("sees the first two movies listed on the page", () => {
       cy.get(".movies")
         .find("li")
         .first()

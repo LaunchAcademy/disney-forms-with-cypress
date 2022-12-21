@@ -11,7 +11,7 @@ describe("New Movie Form", () => {
   })
   
   // unnecessary test example, though these may be present for assignments to guide you
-  // it("displays the text 'Add a New Movie", () => {
+  // it.only("displays the text 'Add a New Movie", () => {
   //   cy.get("h1")
   //     .should("have.text", "Add a New Movie")
   // })
