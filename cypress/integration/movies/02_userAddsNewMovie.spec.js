@@ -7,14 +7,9 @@ const disneyMoviesFilePath = "disneyMovies.json"
 
 describe("New Movie Form", () => {
   beforeEach(() => {
+    cy.writeFile(disneyMoviesFilePath, JSON.stringify(starterDisneyMovies))
     cy.visit("/movies/new")
   })
-  
-  // unnecessary test example, though these may be present for assignments to guide you
-  // it("displays the text 'Add a New Movie", () => {
-  //   cy.get("h1")
-  //     .should("have.text", "Add a New Movie")
-  // })
 
   context("when the form is submitted correctly", () => {
     it("the user is redirected to the index page where they can see the new movie info", () => {
@@ -94,7 +89,7 @@ describe("New Movie Form", () => {
     })
   })
 
-  afterEach(() => {
-    cy.writeFile(disneyMoviesFilePath, JSON.stringify(starterDisneyMovies))
-  })
+  // afterEach(() => {
+  //   cy.writeFile(disneyMoviesFilePath, JSON.stringify(starterDisneyMovies))
+  // })
 })

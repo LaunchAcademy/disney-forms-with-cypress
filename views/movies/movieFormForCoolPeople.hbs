@@ -1,0 +1,31 @@
+<h1>Welcome to the Super Cool Form Page</h1>
+
+{{!-- GET, POST, PUT/PATCH, DELETE 
+READ, CREATE, UPDATE, DESTROY --}}
+
+<ul class="errors">
+    {{#each errors }}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+
+
+<form action="/movies" method="POST" class="new-movie-form">
+    <label for="title">Title:
+        <input type="text" id="title" name="title">
+    </label>
+
+    <br>
+    <label for="releaseYear"> Release Year:
+        <input type="text" id="releaseYear" name="releaseYear">
+    </label>
+    
+    <br>
+
+    <label for="runtime"> Runtime:
+        <input type="text" name="runtime" id="runtime">
+    </label>
+    <br>
+
+    <input type="submit" value="Save!" class="button"> 
+</form>

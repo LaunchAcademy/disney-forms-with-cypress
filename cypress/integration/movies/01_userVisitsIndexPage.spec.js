@@ -2,7 +2,13 @@
 
 // import starterDisneyMovies from "../../fixtures/starterDisneyMovies.json"
 
-const disneyMoviesFilePath = "disneyMovies.json"
+// const disneyMoviesFilePath = "disneyMovies.json"
+
+
+// .something -> className (HTML)
+// #otherThing -> id 
+// h1 -> 
+
 
 describe("User Visits Index Page", () => {
   beforeEach(() => {
@@ -13,7 +19,7 @@ describe("User Visits Index Page", () => {
     it("sees the first two movies on listed on the page", () => {
       cy.get(".movies")
         .find("li")
-        .first()
+        .eq(0)
         .should("have.text", "Beauty and the Beast, 1991, 84 minutes")
 
       cy.get(".movies")

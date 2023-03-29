@@ -1,7 +1,9 @@
-<h1>My Favorite Disney Movies!</h1>
+<h1 class="title">Add a New Movie</h1>
 
 <ul class="movies">
   {{#each movies }}
     <li>{{ this.title }}, {{ this.releaseYear }}, {{ this.runtime }}</li>
   {{/each }}
 </ul>
+
+<a href="/movies/new">Add a Movie</a>

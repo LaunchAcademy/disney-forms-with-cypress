@@ -4,49 +4,25 @@ import _ from "lodash";
 const disneyMoviesPath = "disneyMovies.json"
 
 class Movie {
-  constructor({ id, title, releaseYear, runtime }) {
-    this.id = id;
-    this.title = title;
-    this.releaseYear = releaseYear;
-    this.runtime = runtime;
+  constructor(movieObject) {
+    this.id = movieObject.id
+    this.title = movieObject.title
+    this.releaseYear = movieObject.releaseYear
+    this.runtime = movieObject.runtime
   }
 
   // static or "class" method means we call it on the class, not on an instance
   static findAll() {
     // retrieve the JSON data, and turn it into JS (an object with an array)
-    const moviesData = JSON.parse(fs.readFileSync(disneyMoviesPath))
+    const moviesDataObject = JSON.parse(fs.readFileSync(disneyMoviesPath))
 
     // iterate over all of the movies, and ensure they are remade as Movie objects
-    const movies = moviesData.disneyMovies.map((movie) => {
+    const movies = moviesDataObject.disneyMovies.map((movie) => {
       // each `return` in .map creates a new element in the `movies` array
       return new Movie(movie);
     });
 
     return movies
-  }
-
-  isValid() {
-    // an empty errors object to add to
-    this.errors = {}
-    // the fields we wish to check for
-    const requiredFields = ["title", "releaseYear", "runtime"]
-    // by default, we will assume the movie is valid
-    let isValid = true
-
-
-    for (const requiredField of requiredFields) {
-      // create a new key using the required field, that we can add errors to 
-      this.errors[requiredField] = []
-      // if the field is not on the object we are calling `isValid` on
-      if(!this[requiredField]) {
-        // set `isValid` to false 
-        isValid = false
-        // and add an error message to the array
-        this.errors[requiredField].push("can't be blank")
-      }
-    }
-    
-    return isValid
   }
 
   static getNextMovieId() {
@@ -63,9 +39,6 @@ class Movie {
 
   save() {
     // if this Movie object passes the check
-    if (this.isValid()) {
-      // delete all errors and grab the id for soon to be persisted movie
-      delete this.errors
       this.id = this.constructor.getNextMovieId();
       
       // grab all of the existing movies into an array, and add this one to it
@@ -76,11 +49,7 @@ class Movie {
       const data = { disneyMovies: movies };
       fs.writeFileSync(disneyMoviesPath, JSON.stringify(data));
       return true;
-    } else {
-      // if it isnt valid, we return false
-      return false
     }
   }
-}
 
 export default Movie;
