@@ -52,9 +52,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(rootRouter)
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404))
-})
+// app.use((req, res, next) => {
+//   next(createError(404))
+// })
 
 // error handler
 app.use((err, req, res) => {
@@ -66,7 +66,6 @@ app.use((err, req, res) => {
   res.status(err.status || 500)
   res.render("error")
 })
-
 
 app.listen(3000, "0.0.0.0", () => {
   console.log("Server is listening...")
