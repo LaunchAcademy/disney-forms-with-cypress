@@ -7,6 +7,8 @@ const disneyMoviesFilePath = "disneyMovies.json"
 
 describe("New Movie Form", () => {
   beforeEach(() => {
+    cy.writeFile(disneyMoviesFilePath, JSON.stringify(starterDisneyMovies))
+
     cy.visit("/movies/new")
   })
   
@@ -92,9 +94,5 @@ describe("New Movie Form", () => {
         .last()
         .should("not.have.text", "")
     })
-  })
-
-  afterEach(() => {
-    cy.writeFile(disneyMoviesFilePath, JSON.stringify(starterDisneyMovies))
   })
 })
