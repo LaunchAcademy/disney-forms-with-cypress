@@ -11,15 +11,9 @@ describe("New Movie Form", () => {
 
     cy.visit("/movies/new")
   })
-  
-  // unnecessary test example, though these may be present for assignments to guide you
-  // it("displays the text 'Add a New Movie", () => {
-  //   cy.get("h1")
-  //     .should("have.text", "Add a New Movie")
-  // })
 
   context("when the form is submitted correctly", () => {
-    it("the user is redirected to the index page where they can see the new movie info", () => {
+    it.only("the user is redirected to the index page where they can see the new movie info", () => {
       cy.get("#title")
         .type(newMovie.title)
         .should("have.value", newMovie.title)

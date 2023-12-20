@@ -1,5 +1,9 @@
-<h1></h1>
+<h1>These are the Disney Movies</h1>
 
 <ul class="movies">
-
+  {{#each movies }}
+    <li>{{ this.title }}, {{ this.releaseYear }}, {{ this.runtime }}</li>
+  {{/each}}
 </ul>
+
+<a href="/movies/new">Add a Movie</a>

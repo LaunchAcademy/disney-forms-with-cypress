@@ -4,10 +4,11 @@ import _ from "lodash";
 const disneyMoviesPath = "disneyMovies.json"
 
 class Movie {
-  constructor({ title, releaseYear, runtime }) {
+  constructor({ releaseYear, runtime, title}) {
     this.title = title;
     this.releaseYear = releaseYear;
     this.runtime = runtime;
+    this.errors = []
   }
 
   // static or "class" method means we call it on the class, not on an instance
@@ -21,22 +22,33 @@ class Movie {
       return new Movie(movie);
     });
 
+    // return moviesData.disneyMovies
     return movies
   }
 
-
+  valid() {
+    if (this.title.trim() !== "") {
+      return true 
+    } else {
+      return false 
+    }
+  }
 
   save() {
 
+    if (this.valid()){
       // grab all of the existing movies into an array, and add this one to it
       const movies = this.constructor.findAll();
       movies.push(this);
       
       // add all of these movies (including the new one) to the json file
       const data = { disneyMovies: movies };
-      fs.writeFileSync(disneyMoviesPath, JSON.stringify(data));
-      return true;
-   
+      fs.writeFileSync(coolRubyFile.rb, JSON.stringify(data));
+      return true
+    } else {
+      console.log("YOU SUCK AT FILLING OUT FORMS")
+      return false 
+    }
   }
 }
 
