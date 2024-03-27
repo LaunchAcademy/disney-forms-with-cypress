@@ -1,5 +1,33 @@
 <h1>Add a New Movie</h1>
 
-<form action="/movies/addTheMovie" method="POST">
+<ul class="errors">
+{{#each errors}}
+  <li>
+    {{this}}
+  </li>
+{{/each}}
+
+</ul>
+
+<form action="/movies/addTheMovie" method="POST" class="new-movie-form">
+  <label for="title"> Title: 
+    <input type="text" id="title" name="title" value="{{title}}">
+  </label>
+
+  <br>
+
+  <label for="releaseYear"> Release Year:
+    <input type="text" id="releaseYear" name="releaseYear" value="{{releaseYear}}">
+  </label>
+
+  <br>
+
+  <label for="runtime"> Runtime:
+    <input type="text" id="runtime" name="runtime" value="{{runtime}}">
+  </label>
+
+  <br>
+
+  <input class="button" type="submit" value="Save!">
 
 </form>

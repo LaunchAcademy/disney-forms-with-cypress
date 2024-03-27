@@ -7,10 +7,8 @@ const disneyMoviesFilePath = "disneyMovies.json"
 describe("User Visits Index Page", () => {
   beforeEach(() => {
     cy.visit("/movies")
-
       // not needed for tests that don't edit our data in some way
       // cy.writeFile(disneyMoviesFilePath, JSON.stringify(starterDisneyMovies))
-
   })
   
   context("when arriving at the movie index page", () => {

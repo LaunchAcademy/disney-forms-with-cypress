@@ -13,14 +13,14 @@ class Movie {
   // static or "class" method means we call it on the class, not on an instance
   static findAll() {
     // retrieve the JSON data, and turn it into JS (an object with an array)
-    const moviesData = JSON.parse(fs.readFileSync(disneyMoviesPath))
+    const jsonData = fs.readFileSync(disneyMoviesPath)
+    const disneyMoviesObject = JSON.parse(jsonData)
 
-    // iterate over all of the movies, and ensure they are remade as Movie objects
-    const movies = moviesData.disneyMovies.map((movie) => {
-      // each `return` in .map creates a new element in the `movies` array
-      return new Movie(movie);
-    });
-
+    const moviesArray = disneyMoviesObject.disneyMovies
+    const movies = moviesArray.map(movieObject => {
+      return new Movie(movieObject)
+    })
+  
     return movies
   }
 
@@ -29,14 +29,12 @@ class Movie {
   save() {
 
       // grab all of the existing movies into an array, and add this one to it
-      const movies = this.constructor.findAll();
-      movies.push(this);
+      const movies = Movie.findAll()
+      movies.push(this)
       
       // add all of these movies (including the new one) to the json file
-      const data = { disneyMovies: movies };
-      fs.writeFileSync(disneyMoviesPath, JSON.stringify(data));
-      return true;
-   
+      const jsonMovies = JSON.stringify({ disneyMovies: movies})
+      fs.writeFileSync(disneyMoviesPath, jsonMovies)
   }
 }
 
